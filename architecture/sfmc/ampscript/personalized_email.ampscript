@@ -1,0 +1,23 @@
+%%[
+SET @firstName = AttributeValue("FirstName")
+SET @segment = AttributeValue("SegmentName")
+SET @ctaUrl = AttributeValue("PersonalizedCTAUrl")
+
+IF EMPTY(@firstName) THEN
+  SET @firstName = "there"
+ENDIF
+
+IF @segment == "High Intent Prospect" THEN
+  SET @headline = "Your personalized guide is ready"
+ELSEIF @segment == "Existing Customer" THEN
+  SET @headline = "Explore benefits selected for you"
+ELSE
+  SET @headline = "See what is available for you"
+ENDIF
+]%%
+
+Hello %%=v(@firstName)=%%,
+
+%%=v(@headline)=%%
+
+<a href="%%=RedirectTo(@ctaUrl)=%%">Continue</a>
